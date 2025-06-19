@@ -1,1 +1,32 @@
-console.log('test');
+
+function createAnimal(name) {
+    return {
+        name: name,
+        speak() {
+            console.log(`Animal sound`);
+        }
+    };
+}
+
+function createCat(name, color) {
+    const cat = {
+        color: color,
+        meow() {
+            console.log(`${name} says moew!`);
+        },
+        toString() {
+            return (`Cat: name - ${name}, color - ${color}`);
+        }
+
+    };
+    cat.__proto__ = createAnimal(name);
+
+    return cat;
+}
+
+const c = createCat('Catty', 'black');
+
+c.meow();
+c.speak();
+
+console.log(c.toString());
