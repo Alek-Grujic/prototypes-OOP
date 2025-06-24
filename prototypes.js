@@ -33,32 +33,60 @@
 
 
 
-function createComputer(brand) {
-    return {
-        brand: brand,
-        info() {
-            console.log(`Computer brand: ${brand}`);
-        }
-    }
+// function createComputer(brand) {
+//     return {
+//         brand: brand,
+//         info() {
+//             console.log(`Computer brand: ${brand}`);
+//         }
+//     }
+// }
+
+// function createLaptop(brand, weight) {
+//     const laptop = {
+//         weight: weight,
+//         carry() {
+//             console.log(`Carrying ${brand} laptop that weighs ${weight}kg`);
+//         },
+//         toString() {
+//             return (`Laptop: ${brand}, ${weight}kg`)
+//         }
+//     }
+//     laptop.__proto__ = createComputer(brand);
+
+//     return laptop;
+// }
+
+// const I = createLaptop(`Asus`, 7);
+
+// I.carry();
+// I.info();
+// console.log(I.toString());
+
+
+// -------------------------------------------
+
+function setName(name) {
+    this.name = name;
 }
 
-function createLaptop(brand, weight) {
-    const laptop = {
-        weight: weight,
-        carry() {
-            console.log(`Carrying ${brand} laptop that weighs ${weight}kg`);
-        },
-        toString() {
-            return (`Laptop: ${brand}, ${weight}kg`)
-        }
-    }
-    laptop.__proto__ = createComputer(brand);
-
-    return laptop;
+function setAge(age) {
+    this.age = age
 }
 
-const I = createLaptop(`Asus`, 7);
+function Person() {
 
-I.carry();
-I.info();
-console.log(I.toString());
+}
+
+Person.prototype.desctibe = function () {
+    console.log(`My name is ${this.name} and I am ${this.age} years old.`);
+}
+
+const p = new Person();
+
+setName.call(p, 'Ana');
+setAge.call(p, 25);
+
+p.desctibe();
+
+console.log(p);
