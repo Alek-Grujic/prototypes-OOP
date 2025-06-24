@@ -66,27 +66,60 @@
 
 // -------------------------------------------
 
-function setName(name) {
+// function setName(name) {
+//     this.name = name;
+// }
+
+// function setAge(age) {
+//     this.age = age
+// }
+
+// function Person() {
+
+// }
+
+// Person.prototype.desctibe = function () {
+//     console.log(`My name is ${this.name} and I am ${this.age} years old.`);
+// }
+
+// const p = new Person();
+
+// setName.call(p, 'Ana');
+// setAge.call(p, 25);
+
+// p.desctibe();
+
+// console.log(p);
+
+
+// -------------------------------------------
+
+
+function Being(name) {
     this.name = name;
 }
 
-function setAge(age) {
-    this.age = age
+Being.prototype.exist = function () {
+    console.log(`I exist. My name is ${this.name}`)
 }
 
-function Person() {
-
+function Human(name, language) {
+    Being.call(this, name);
+    this.language = language;
 }
 
-Person.prototype.desctibe = function () {
-    console.log(`My name is ${this.name} and I am ${this.age} years old.`);
+Human.prototype = Object.create(Being.prototype);
+Human.prototype.constructor = Human;
+
+
+Human.prototype.speak = function () {
+    console.log(`I speak ${this.language}`);
 }
 
-const p = new Person();
 
-setName.call(p, 'Ana');
-setAge.call(p, 25);
 
-p.desctibe();
+const x = new Being(`Jones`);
 
-console.log(p);
+const y = new Human(`Michael`, `English`);
+y.speak();
+y.exist();
