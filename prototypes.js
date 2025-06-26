@@ -116,10 +116,32 @@ Human.prototype.speak = function () {
     console.log(`I speak ${this.language}`);
 }
 
+function Student(name, language, subject) {
+    Human.call(this, name, language);
+    this.subject = subject;
+}
 
+Student.prototype = Object.create(Human.prototype);
+Student.prototype.constructor = Student;
 
-const x = new Being(`Jones`);
+Student.prototype.study = function () {
+    console.log(`I study ${this.subject}`);
+}
+
+Student.prototype.describe = function () {
+    console.log(`I'm ${this.name}, my language is ${this.language} and I study ${this.subject}`);
+}
 
 const y = new Human(`Michael`, `English`);
 y.speak();
 y.exist();
+
+
+const x = new Student(`Jones`, `French`, `Math`);
+
+x.study();
+x.speak();
+x.describe();
+
+
+console.log(x);
