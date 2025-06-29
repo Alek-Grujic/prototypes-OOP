@@ -95,53 +95,87 @@
 // -------------------------------------------
 
 
-function Being(name) {
-    this.name = name;
+// function Being(name) {
+//     this.name = name;
+// }
+
+// Being.prototype.exist = function () {
+//     console.log(`I exist. My name is ${this.name}`)
+// }
+
+// function Human(name, language) {
+//     Being.call(this, name);
+//     this.language = language;
+// }
+
+// Human.prototype = Object.create(Being.prototype);
+// Human.prototype.constructor = Human;
+
+
+// Human.prototype.speak = function () {
+//     console.log(`I speak ${this.language}`);
+// }
+
+// function Student(name, language, subject) {
+//     Human.call(this, name, language);
+//     this.subject = subject;
+// }
+
+// Student.prototype = Object.create(Human.prototype);
+// Student.prototype.constructor = Student;
+
+// Student.prototype.study = function () {
+//     console.log(`I study ${this.subject}`);
+// }
+
+// Student.prototype.describe = function () {
+//     console.log(`I'm ${this.name}, my language is ${this.language} and I study ${this.subject}`);
+// }
+
+
+// const y = new Human(`Michael`, `English`);
+// y.speak();
+// y.exist();
+
+
+// const x = new Student(`Jones`, `French`, `Math`);
+// x.study();
+// x.speak();
+// x.describe();
+
+
+// console.log(x);
+
+// --------------------------------------------------
+
+
+// Threed exercise OOP
+
+function Device(brand) {
+    this.brand = brand;
 }
 
-Being.prototype.exist = function () {
-    console.log(`I exist. My name is ${this.name}`)
+Device.prototype.powerOn = function () {
+    console.log(`Device by ${this.brand} is now on`)
 }
 
-function Human(name, language) {
-    Being.call(this, name);
-    this.language = language;
+function Smartphone(brand, os) {
+    Device.call(this, brand);
+    this.os = os;
 }
 
-Human.prototype = Object.create(Being.prototype);
-Human.prototype.constructor = Human;
+Smartphone.prototype = Object.create(Device.prototype);
+Smartphone.prototype.constructor = Smartphone;
 
-
-Human.prototype.speak = function () {
-    console.log(`I speak ${this.language}`);
+Smartphone.prototype.info = function () {
+    console.log(`Smartphone by ${this.brand} running ${this.os}`);
 }
 
-function Student(name, language, subject) {
-    Human.call(this, name, language);
-    this.subject = subject;
-}
+const phone = new Smartphone(`Samsung`, `Android`);
+const blabla = new Device('Telefon');
 
-Student.prototype = Object.create(Human.prototype);
-Student.prototype.constructor = Student;
+phone.powerOn();
+phone.info();
+console.log(phone);
 
-Student.prototype.study = function () {
-    console.log(`I study ${this.subject}`);
-}
-
-Student.prototype.describe = function () {
-    console.log(`I'm ${this.name}, my language is ${this.language} and I study ${this.subject}`);
-}
-
-const y = new Human(`Michael`, `English`);
-y.speak();
-y.exist();
-
-
-const x = new Student(`Jones`, `French`, `Math`);
-
-x.study();
-x.speak();
-x.describe();
-
-
-console.log(x);
+console.log(blabla);
