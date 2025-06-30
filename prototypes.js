@@ -151,31 +151,125 @@
 
 // Threed exercise OOP
 
-function Device(brand) {
-    this.brand = brand;
+// function Device(brand) {
+//     this.brand = brand;
+// }
+
+// Device.prototype.powerOn = function () {
+//     console.log(`Device by ${this.brand} is now on`)
+// }
+
+// function Smartphone(brand, os) {
+//     Device.call(this, brand);
+//     this.os = os;
+// }
+
+// Smartphone.prototype = Object.create(Device.prototype);
+// Smartphone.prototype.constructor = Smartphone;
+
+// Smartphone.prototype.info = function () {
+//     console.log(`Smartphone by ${this.brand} running ${this.os}`);
+// }
+
+// const phone = new Smartphone(`Samsung`, `Android`);
+
+// phone.powerOn();
+// phone.info();
+
+
+// --------------------------------------------------
+
+// function Stopwatch() {
+//     let startTime;
+//     let endTime;
+//     let running;
+//     let duration = 0;
+
+//     this.start = function () {
+//         if (running)
+//             throw new Error('Stopwatch has already started');
+//         running = true;
+
+//         startTime = new Date();
+//     };
+
+//     this.stop = function () {
+//         if (!running)
+//             throw new Error('Stopwatch is not started.');
+//         running = false;
+
+//         endTime = new Date();
+
+//         const seconds = (endTime.getTime() - startTime.getTime()) / 1000;
+
+//         duration += seconds;
+//     };
+
+//     this.reset = function () {
+//         startTime = null;
+//         endTime = null;
+//         running = false;
+//         duration = 0;
+//     };
+
+//     Object.defineProperty(this, 'duration', {
+//         get: function () { return duration; }
+//     });
+
+//     Object.defineProperty(this, 'display', {
+//         get: function () { return duration.toFixed(2); }
+//     });
+// }
+
+// const sw = new Stopwatch()
+
+// sw.start();
+
+
+
+function Stopwatch() {
+    this.startTime;
+    this.endTime;
+    this.running;
+    this.duration = 0;
+
+    // Object.defineProperty(this, 'duration', {
+    //     get: function () { return duration; }
+    // });
+
+    // Object.defineProperty(this, 'display', {
+    //     get: function () { return duration.toFixed(2); }
+    // });
 }
 
-Device.prototype.powerOn = function () {
-    console.log(`Device by ${this.brand} is now on`)
-}
 
-function Smartphone(brand, os) {
-    Device.call(this, brand);
-    this.os = os;
-}
+Stopwatch.prototype.start = function () {
+    if (this.running)
+        throw new Error('Stopwatch has already started');
+    this.running = true;
 
-Smartphone.prototype = Object.create(Device.prototype);
-Smartphone.prototype.constructor = Smartphone;
+    this.startTime = new Date();
+};
 
-Smartphone.prototype.info = function () {
-    console.log(`Smartphone by ${this.brand} running ${this.os}`);
-}
+Stopwatch.prototype.stop = function () {
+    if (!this.running)
+        throw new Error('Stopwatch is not started.');
+    this.running = false;
 
-const phone = new Smartphone(`Samsung`, `Android`);
-const blabla = new Device('Telefon');
+    this.endTime = new Date();
 
-phone.powerOn();
-phone.info();
-console.log(phone);
+    const seconds = (this.endTime.getTime() - this.startTime.getTime()) / 1000;
 
-console.log(blabla);
+    this.duration += seconds;
+};
+
+Stopwatch.prototype.reset = function () {
+    this.startTime = null;
+    this.endTime = null;
+    this.running = false;
+    this.duration = 0;
+};
+
+const sw = new Stopwatch()
+
+sw.start();
