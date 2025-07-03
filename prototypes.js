@@ -261,52 +261,75 @@
 
 // method overriding
 
-function Animal(name) {
-    this.name = name;
-}
+// function Animal(name) {
+//     this.name = name;
+// }
 
-Animal.prototype.speak = function () {
-    console.log(`${this.name} makes a sound.`)
-}
+// Animal.prototype.speak = function () {
+//     console.log(`${this.name} makes a sound.`)
+// }
 
-function Dog(name) {
-    Animal.call(this, name);
-}
+// function Dog(name) {
+//     Animal.call(this, name);
+// }
 
-Dog.prototype = Object.create(Animal.prototype);
-Dog.prototype.constructor = Dog;
+// Dog.prototype = Object.create(Animal.prototype);
+// Dog.prototype.constructor = Dog;
 
-Dog.prototype.speak = function () {
-    console.log(`${this.name} barks.`);
-}
+// Dog.prototype.speak = function () {
+//     console.log(`${this.name} barks.`);
+// }
 
-function Cat(name) {
-    Animal.call(this, name);
-}
+// function Cat(name) {
+//     Animal.call(this, name);
+// }
 
-Cat.prototype = Object.create(Animal.prototype);
-Cat.prototype.constructor = Cat;
+// Cat.prototype = Object.create(Animal.prototype);
+// Cat.prototype.constructor = Cat;
 
-Cat.prototype.speak = function () {
-    console.log(`${this.name} meows.`);
-}
+// Cat.prototype.speak = function () {
+//     console.log(`${this.name} meows.`);
+// }
 
-const dog = new Animal('Dog');
-const dog2 = new Dog('Zeus');
-const cat = new Animal('Cat');
-const cat2 = new Cat('Kitty');
+// const dog = new Animal('Dog');
+// const dog2 = new Dog('Zeus');
+// const cat = new Animal('Cat');
+// const cat2 = new Cat('Kitty');
 
-console.log(dog2);
-dog2.speak();
+// console.log(dog2);
+// dog2.speak();
 
-console.log(dog);
-dog.speak();
+// console.log(dog);
+// dog.speak();
 
-console.log(cat);
-cat2.speak();
+// console.log(cat);
+// cat2.speak();
 
 // --------------------------------------------------
 
+function extend(Cihld, Parent) {
+    Cihld.prototype = Object.create(Parent.prototype);
+    Cihld.prototype.constructor = Cihld;
+}
 
+function Shape() { }
 
+Shape.prototype.duplicate = function () {
+    console.log('duplicate');
+}
 
+function Circle() {
+
+}
+
+extend(Circle, Shape);
+
+Circle.prototype.duplicate = function () {
+    Shape.prototype.duplicate.call(this);
+
+    console.log('duplicate circle');
+}
+
+const c = new Circle();
+
+c.duplicate(); 
