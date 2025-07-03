@@ -222,36 +222,91 @@
 // --------------------------------------------------
 
 
-function Shape(color) {
-    this.color = color;
+// function Shape(color) {
+//     this.color = color;
+// }
+
+// Shape.prototype.duplicate = function () {
+//     console.log('duplicate');
+// }
+
+// function extend(Child, Parent) {
+//     Child.prototype = Object.create(Parent.prototype)
+//     Child.prototype.constructor = Child;
+// }
+
+// function Circle(radius, color) {
+//     Shape.call(this, color);
+//     this.radius = radius;
+// }
+
+// extend(Circle, Shape);
+
+// Circle.prototype.draw = function () {
+//     console.log('draw');
+// }
+
+// function Square(size) {
+//     this.size = size;
+// }
+
+// extend(Square, Shape);
+
+// const s = new Shape();
+// const c = new Circle(1, 'red');
+// const sq = new Square(10);
+
+
+// --------------------------------------------------
+
+// method overriding
+
+function Animal(name) {
+    this.name = name;
 }
 
-Shape.prototype.duplicate = function () {
-    console.log('duplicate');
+Animal.prototype.speak = function () {
+    console.log(`${this.name} makes a sound.`)
 }
 
-function extend(Child, Parent) {
-    Child.prototype = Object.create(Parent.prototype)
-    Child.prototype.constructor = Child;
+function Dog(name) {
+    Animal.call(this, name);
 }
 
-function Circle(radius, color) {
-    Shape.call(this, color);
-    this.radius = radius;
+Dog.prototype = Object.create(Animal.prototype);
+Dog.prototype.constructor = Dog;
+
+Dog.prototype.speak = function () {
+    console.log(`${this.name} barks.`);
 }
 
-extend(Circle, Shape);
-
-Circle.prototype.draw = function () {
-    console.log('draw');
+function Cat(name) {
+    Animal.call(this, name);
 }
 
-function Square(size) {
-    this.size = size;
+Cat.prototype = Object.create(Animal.prototype);
+Cat.prototype.constructor = Cat;
+
+Cat.prototype.speak = function () {
+    console.log(`${this.name} meows.`);
 }
 
-extend(Square, Shape);
+const dog = new Animal('Dog');
+const dog2 = new Dog('Zeus');
+const cat = new Animal('Cat');
+const cat2 = new Cat('Kitty');
 
-const s = new Shape();
-const c = new Circle(1, 'red');
-const sq = new Square(10);
+console.log(dog2);
+dog2.speak();
+
+console.log(dog);
+dog.speak();
+
+console.log(cat);
+cat2.speak();
+
+// --------------------------------------------------
+
+
+
+
