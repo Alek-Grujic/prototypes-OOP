@@ -307,6 +307,36 @@
 
 // --------------------------------------------------
 
+// function extend(Cihld, Parent) {
+//     Cihld.prototype = Object.create(Parent.prototype);
+//     Cihld.prototype.constructor = Cihld;
+// }
+
+// function Shape() { }
+
+// Shape.prototype.duplicate = function () {
+//     console.log('duplicate');
+// }
+
+// function Circle() {
+
+// }
+
+// extend(Circle, Shape);
+
+// Circle.prototype.duplicate = function () {
+//     Shape.prototype.duplicate.call(this);
+
+//     console.log('duplicate circle');
+// }
+
+// const c = new Circle();
+
+// c.duplicate();
+
+// --------------------------------------------------
+
+
 function extend(Cihld, Parent) {
     Cihld.prototype = Object.create(Parent.prototype);
     Cihld.prototype.constructor = Cihld;
@@ -325,11 +355,26 @@ function Circle() {
 extend(Circle, Shape);
 
 Circle.prototype.duplicate = function () {
-    Shape.prototype.duplicate.call(this);
-
     console.log('duplicate circle');
 }
 
-const c = new Circle();
+function Square() {
 
-c.duplicate(); 
+}
+
+extend(Square, Shape);
+
+Square.prototype.duplicate = function () {
+    console.log('duplicate square');
+}
+
+const shapes = [
+    new Circle(),
+    new Square()
+];
+
+for (let shape of shapes) shape.duplicate();
+
+
+const c = new Circle();
+const x = new Square();
