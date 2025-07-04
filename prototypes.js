@@ -337,44 +337,90 @@
 // --------------------------------------------------
 
 
-function extend(Cihld, Parent) {
-    Cihld.prototype = Object.create(Parent.prototype);
-    Cihld.prototype.constructor = Cihld;
+// function extend(Cihld, Parent) {
+//     Cihld.prototype = Object.create(Parent.prototype);
+//     Cihld.prototype.constructor = Cihld;
+// }
+
+// function Shape() { }
+
+// Shape.prototype.duplicate = function () {
+//     console.log('duplicate');
+// }
+
+// function Circle() {
+
+// }
+
+// extend(Circle, Shape);
+
+// Circle.prototype.duplicate = function () {
+//     console.log('duplicate circle');
+// }
+
+// function Square() {
+
+// }
+
+// extend(Square, Shape);
+
+// Square.prototype.duplicate = function () {
+//     console.log('duplicate square');
+// }
+
+// const shapes = [
+//     new Circle(),
+//     new Square()
+// ];
+
+// for (let shape of shapes) shape.duplicate();
+
+
+// const c = new Circle();
+// const x = new Square();
+
+// --------------------------------------------------
+
+
+function canFight(obj) {
+    obj.fight = function () {
+        console.log(`${this.name} swings a weapon!`);
+    };
 }
 
-function Shape() { }
-
-Shape.prototype.duplicate = function () {
-    console.log('duplicate');
+function canHeal(obj) {
+    obj.heal = function () {
+        console.log(`${this.name} heals an ally!`);
+    };
 }
 
-function Circle() {
-
+function canCast(obj) {
+    obj.cast = function () {
+        console.log(`${this.name} casts a spell!`);
+    };
 }
 
-extend(Circle, Shape);
-
-Circle.prototype.duplicate = function () {
-    console.log('duplicate circle');
+function createCharacter(name) {
+    const character = { name };
+    return character;
 }
 
-function Square() {
+const warrior = createCharacter("Thorin");
+canFight(warrior);
 
-}
+const priest = createCharacter("Anduin");
+canHeal(priest);
 
-extend(Square, Shape);
+const mage = createCharacter("Jaina");
+canCast(mage);
 
-Square.prototype.duplicate = function () {
-    console.log('duplicate square');
-}
+const paladin = createCharacter("Uther");
+canFight(paladin);
+canHeal(paladin);
 
-const shapes = [
-    new Circle(),
-    new Square()
-];
+warrior.fight();
+priest.heal();
+mage.cast();
+paladin.fight();
+paladin.heal();
 
-for (let shape of shapes) shape.duplicate();
-
-
-const c = new Circle();
-const x = new Square();
