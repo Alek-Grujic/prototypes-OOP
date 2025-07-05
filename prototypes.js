@@ -382,45 +382,64 @@
 // --------------------------------------------------
 
 
-function canFight(obj) {
-    obj.fight = function () {
-        console.log(`${this.name} swings a weapon!`);
-    };
-}
+// function canFight(obj) {
+//     obj.fight = function () {
+//         console.log(`${this.name} swings a weapon!`);
+//     };
+// }
 
-function canHeal(obj) {
-    obj.heal = function () {
-        console.log(`${this.name} heals an ally!`);
-    };
-}
+// function canHeal(obj) {
+//     obj.heal = function () {
+//         console.log(`${this.name} heals an ally!`);
+//     };
+// }
 
-function canCast(obj) {
-    obj.cast = function () {
-        console.log(`${this.name} casts a spell!`);
-    };
-}
+// function canCast(obj) {
+//     obj.cast = function () {
+//         console.log(`${this.name} casts a spell!`);
+//     };
+// }
 
-function createCharacter(name) {
-    const character = { name };
-    return character;
-}
+// function createCharacter(name) {
+//     const character = { name };
+//     return character;
+// }
 
-const warrior = createCharacter("Thorin");
-canFight(warrior);
+// const warrior = createCharacter("Thorin");
+// canFight(warrior);
 
-const priest = createCharacter("Anduin");
-canHeal(priest);
+// const priest = createCharacter("Audin");
+// canHeal(priest);
 
-const mage = createCharacter("Jaina");
-canCast(mage);
+// const mage = createCharacter("Jaina");
+// canCast(mage);
 
-const paladin = createCharacter("Uther");
-canFight(paladin);
-canHeal(paladin);
+// const paladin = createCharacter("Uther");
+// canFight(paladin);
+// canHeal(paladin);
 
-warrior.fight();
-priest.heal();
-mage.cast();
-paladin.fight();
-paladin.heal();
+// warrior.fight();
+// priest.heal();
+// mage.cast();
+// paladin.fight();
+// paladin.heal();
 
+// --------------------------------------------------
+
+// Mixins
+
+const canEat = {
+    eat: function () {
+        console.log('eating');
+    }
+};
+
+const canWalk = {
+    walk: function () {
+        console.log('walking');
+    }
+};
+
+const person = Object.assign({}, canEat, canWalk);
+
+console.log(person);
