@@ -428,44 +428,79 @@
 
 // Mixins
 
-function mixin(target, ...source) {
-    Object.assign(target, ...source);
+// function mixin(target, ...source) {
+//     Object.assign(target, ...source);
+// }
+
+// const canEat = {
+//     eat: function () {
+//         console.log('eating');
+//     }
+// };
+
+// const canWalk = {
+//     walk: function () {
+//         console.log('walking');
+//     }
+// };
+
+// const canSwim = {
+//     swim: function () {
+//         console.log('swim');
+//     }
+// };
+
+// function Person() {
+
+// }
+
+// mixin(Person.prototype, canEat, canWalk);
+
+// const person = new Person();
+
+// console.log(person);
+
+// function Goldfish() {
+
+// }
+
+// mixin(Goldfish.prototype, canEat, canSwim);
+
+// const goldfish = new Goldfish();
+
+// console.log(goldfish);
+
+// ----------------------------------------------------
+
+const robot = { name: 'Robo' };
+
+const dog = { name: 'Max' };
+
+const wizard = { name: 'Marlin' };
+
+function canSpeak(obj) {
+    obj.speak = function () {
+        console.log(`${this.name} can speak`);
+    };
 }
 
-const canEat = {
-    eat: function () {
-        console.log('eating');
-    }
-};
-
-const canWalk = {
-    walk: function () {
-        console.log('walking');
-    }
-};
-
-const canSwim = {
-    swim: function () {
-        console.log('swim');
-    }
-};
-
-function Person() {
-
+function canWalk(obj) {
+    obj.walk = function () {
+        console.log(`${this.name} can walk`);
+    };
 }
 
-mixin(Person.prototype, canEat, canWalk);
-
-const person = new Person();
-
-console.log(person);
-
-function Goldfish() {
-
+function canCastSpells(obj) {
+    obj.castSpells = function () {
+        console.log(`${this.name} can cast Spells`);
+    };
 }
 
-mixin(Goldfish.prototype, canEat, canSwim);
+canSpeak(robot);
+robot.speak();
 
-const goldfish = new Goldfish();
+canWalk(dog);
+dog.walk();
 
-console.log(goldfish);
+canCastSpells(wizard);
+wizard.castSpells();
