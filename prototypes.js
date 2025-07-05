@@ -440,6 +440,11 @@ const canWalk = {
     }
 };
 
-const person = Object.assign({}, canEat, canWalk);
+function Person() {
 
+}
+
+Object.assign(Person.prototype, canEat, canWalk);
+
+const person = new Person();
 console.log(person);
