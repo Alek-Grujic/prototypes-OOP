@@ -428,6 +428,10 @@
 
 // Mixins
 
+function mixin(target, ...source) {
+    Object.assign(target, ...source);
+}
+
 const canEat = {
     eat: function () {
         console.log('eating');
@@ -450,7 +454,7 @@ function Person() {
 
 }
 
-Object.assign(Person.prototype, canEat, canWalk);
+mixin(Person.prototype, canEat, canWalk);
 
 const person = new Person();
 
@@ -460,7 +464,7 @@ function Goldfish() {
 
 }
 
-Object.assign(Goldfish.prototype, canEat, canSwim);
+mixin(Goldfish.prototype, canEat, canSwim);
 
 const goldfish = new Goldfish();
 
