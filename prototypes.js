@@ -440,6 +440,12 @@ const canWalk = {
     }
 };
 
+const canSwim = {
+    swim: function () {
+        console.log('swim');
+    }
+};
+
 function Person() {
 
 }
@@ -447,4 +453,15 @@ function Person() {
 Object.assign(Person.prototype, canEat, canWalk);
 
 const person = new Person();
+
 console.log(person);
+
+function Goldfish() {
+
+}
+
+Object.assign(Goldfish.prototype, canEat, canSwim);
+
+const goldfish = new Goldfish();
+
+console.log(goldfish);
