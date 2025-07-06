@@ -497,10 +497,47 @@ function canCastSpells(obj) {
 }
 
 canSpeak(robot);
-robot.speak();
+canWalk(robot);
 
+canSpeak(dog);
 canWalk(dog);
-dog.walk();
 
+canSpeak(wizard);
 canCastSpells(wizard);
+
+robot.speak();
+dog.speak();
+dog.walk();
+wizard.speak();
 wizard.castSpells();
+
+const characters = [robot, dog, wizard];
+
+function info() {
+    const namesWhoSpeak = [];
+    for (let key of characters) {
+        if (typeof key.speak === "function") namesWhoSpeak.push(key.name);
+    }
+    const joined = namesWhoSpeak.join(', ')
+    console.log(`These characters can speak: ${joined}`);
+
+
+    const namesWhoWalk = [];
+    for (let key of characters) {
+        if (typeof key.walk === "function") namesWhoWalk.push(key.name);
+    }
+    const joinedWalk = namesWhoWalk.join(', ')
+    console.log(`These characters can walk: ${joinedWalk}`);
+
+
+    const namesWhoCastSpells = [];
+    for (let key of characters) {
+        if (typeof key.castSpells === "function") namesWhoCastSpells.push(key.name);
+    }
+    const joinedCastSpells = namesWhoCastSpells.join(', ')
+    console.log(`These characters can cast spells: ${joinedCastSpells}`);
+}
+
+info();
+
+// --------------------------------------------------
