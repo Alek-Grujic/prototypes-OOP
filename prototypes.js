@@ -513,29 +513,46 @@ wizard.castSpells();
 
 const characters = [robot, dog, wizard];
 
+// function info() {
+//     const namesWhoSpeak = [];
+//     for (let key of characters) {
+//         if (typeof key.speak === "function") namesWhoSpeak.push(key.name);
+//     }
+//     const joined = namesWhoSpeak.join(', ')
+//     console.log(`These characters can speak: ${joined}`);
+
+
+//     const namesWhoWalk = [];
+//     for (let key of characters) {
+//         if (typeof key.walk === "function") namesWhoWalk.push(key.name);
+//     }
+//     const joinedWalk = namesWhoWalk.join(', ')
+//     console.log(`These characters can walk: ${joinedWalk}`);
+
+
+//     const namesWhoCastSpells = [];
+//     for (let key of characters) {
+//         if (typeof key.castSpells === "function") namesWhoCastSpells.push(key.name);
+//     }
+//     const joinedCastSpells = namesWhoCastSpells.join(', ')
+//     console.log(`These characters can cast spells: ${joinedCastSpells}`);
+// }
+
+function listByAbility(methodName, message) {
+    const names = [];
+    for (let character of characters) {
+        if (typeof character[methodName] === "function") {
+            names.push(character.name);
+        }
+    }
+    const joined = names.join(', ');
+    console.log(`${message}: ${joined}`);
+}
+
 function info() {
-    const namesWhoSpeak = [];
-    for (let key of characters) {
-        if (typeof key.speak === "function") namesWhoSpeak.push(key.name);
-    }
-    const joined = namesWhoSpeak.join(', ')
-    console.log(`These characters can speak: ${joined}`);
-
-
-    const namesWhoWalk = [];
-    for (let key of characters) {
-        if (typeof key.walk === "function") namesWhoWalk.push(key.name);
-    }
-    const joinedWalk = namesWhoWalk.join(', ')
-    console.log(`These characters can walk: ${joinedWalk}`);
-
-
-    const namesWhoCastSpells = [];
-    for (let key of characters) {
-        if (typeof key.castSpells === "function") namesWhoCastSpells.push(key.name);
-    }
-    const joinedCastSpells = namesWhoCastSpells.join(', ')
-    console.log(`These characters can cast spells: ${joinedCastSpells}`);
+    listByAbility("speak", "These characters can speak");
+    listByAbility("walk", "These characters can walk");
+    listByAbility("castSpells", "These characters can cast spells");
 }
 
 info();
