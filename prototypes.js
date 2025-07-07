@@ -472,46 +472,46 @@
 
 // ----------------------------------------------------
 
-const robot = { name: 'Robo' };
+// const robot = { name: 'Robo' };
 
-const dog = { name: 'Max' };
+// const dog = { name: 'Max' };
 
-const wizard = { name: 'Marlin' };
+// const wizard = { name: 'Marlin' };
 
-function canSpeak(obj) {
-    obj.speak = function () {
-        console.log(`${this.name} can speak`);
-    };
-}
+// function canSpeak(obj) {
+//     obj.speak = function () {
+//         console.log(`${this.name} can speak`);
+//     };
+// }
 
-function canWalk(obj) {
-    obj.walk = function () {
-        console.log(`${this.name} can walk`);
-    };
-}
+// function canWalk(obj) {
+//     obj.walk = function () {
+//         console.log(`${this.name} can walk`);
+//     };
+// }
 
-function canCastSpells(obj) {
-    obj.castSpells = function () {
-        console.log(`${this.name} can cast Spells`);
-    };
-}
+// function canCastSpells(obj) {
+//     obj.castSpells = function () {
+//         console.log(`${this.name} can cast Spells`);
+//     };
+// }
 
-canSpeak(robot);
-canWalk(robot);
+// canSpeak(robot);
+// canWalk(robot);
 
-canSpeak(dog);
-canWalk(dog);
+// canSpeak(dog);
+// canWalk(dog);
 
-canSpeak(wizard);
-canCastSpells(wizard);
+// canSpeak(wizard);
+// canCastSpells(wizard);
 
-robot.speak();
-dog.speak();
-dog.walk();
-wizard.speak();
-wizard.castSpells();
+// robot.speak();
+// dog.speak();
+// dog.walk();
+// wizard.speak();
+// wizard.castSpells();
 
-const characters = [robot, dog, wizard];
+// const characters = [robot, dog, wizard];
 
 // function info() {
 //     const namesWhoSpeak = [];
@@ -538,23 +538,66 @@ const characters = [robot, dog, wizard];
 //     console.log(`These characters can cast spells: ${joinedCastSpells}`);
 // }
 
-function listByAbility(methodName, message) {
-    const names = [];
-    for (let character of characters) {
-        if (typeof character[methodName] === "function") {
-            names.push(character.name);
-        }
-    }
-    const joined = names.join(', ');
-    console.log(`${message}: ${joined}`);
-}
+// function listByAbility(methodName, message) {
+//     const names = [];
+//     for (let character of characters) {
+//         if (typeof character[methodName] === "function") {
+//             names.push(character.name);
+//         }
+//     }
+//     const joined = names.join(', ');
+//     console.log(`${message}: ${joined}`);
+// }
 
-function info() {
-    listByAbility("speak", "These characters can speak");
-    listByAbility("walk", "These characters can walk");
-    listByAbility("castSpells", "These characters can cast spells");
-}
+// function info() {
+//     listByAbility("speak", "These characters can speak");
+//     listByAbility("walk", "These characters can walk");
+//     listByAbility("castSpells", "These characters can cast spells");
+// }
 
-info();
+// info();
 
 // --------------------------------------------------
+
+const canSwim = {
+    swim() {
+        console.log(`${this.name} is swimming`);
+    }
+};
+
+const canFly = {
+    fly() {
+        console.log(`${this.name} is flying`);
+    }
+};
+
+const canShoot = {
+    shoot() {
+        console.log(`${this.name} is shooting`);
+    }
+};
+
+function createCharacter(name) {
+    return { name };
+}
+
+const aqua = createCharacter('Aqua');
+Object.assign(aqua, canShoot);
+aqua.shoot();
+
+const jet = createCharacter('Jet');
+Object.assign(jet, canFly);
+jet.fly();
+
+const nemo = createCharacter('Nemo');
+Object.assign(nemo, canSwim);
+nemo.swim();
+
+
+
+
+
+
+
+
+
