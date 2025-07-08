@@ -595,33 +595,55 @@
 
 // --------------------------------------------------
 
-const canGreet = {
-    greet(otherCharacter) {
-        console.log(`${this.name} greets ${otherCharacter.name}`)
-    }
-};
+// const canGreet = {
+//     greet(otherCharacter) {
+//         console.log(`${this.name} greets ${otherCharacter.name}`)
+//     }
+// };
 
-const canReactToGreeting = {
-    react() {
-        console.log(`${this.name} smiles in return`);
-    }
-};
+// const canReactToGreeting = {
+//     react() {
+//         console.log(`${this.name} smiles in return`);
+//     }
+// };
 
-function createCharacter(name) {
-    return { name };
+// function createCharacter(name) {
+//     return { name };
+// }
+
+// const alice = createCharacter('Alice');
+// const bob = createCharacter('Bob');
+
+// Object.assign(alice, canGreet);
+// Object.assign(bob, canReactToGreeting)
+
+// alice.greet(bob);
+// bob.react();
+
+// --------------------------------------------------
+
+function User(name, email) {
+    this.name = name;
+    this.email = email;
 }
 
-const alice = createCharacter('Alice');
-const bob = createCharacter('Bob');
+User.prototype.describe = function () {
+    console.log(`${this.name} - ${this.email}`);
+}
 
-Object.assign(alice, canGreet);
-Object.assign(bob, canReactToGreeting)
+function Student(name, email) {
+    User.call(this, name, email);
+}
 
+Student.prototype = Object.create(User.prototype);
+Student.prototype.construcor = Student;
 
+Student.prototype.enroll = function (course) {
+    console.log(`${this.name} enrolled in ${course}`);
+}
 
-alice.greet(bob);
-bob.react();
-
-
-
-
+const y = new Student('Ane', 'ane.jones@gmail.com');
+const x = new User('Mark', 'mark.office@gmail.com');
+y.describe();
+x.describe();
+y.enroll('Advanced JS');
