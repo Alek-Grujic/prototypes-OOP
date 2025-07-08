@@ -559,21 +559,51 @@
 
 // --------------------------------------------------
 
-const canSwim = {
-    swim() {
-        console.log(`${this.name} is swimming`);
+// const canSwim = {
+//     swim() {
+//         console.log(`${this.name} is swimming`);
+//     }
+// };
+
+// const canFly = {
+//     fly() {
+//         console.log(`${this.name} is flying`);
+//     }
+// };
+
+// const canShoot = {
+//     shoot() {
+//         console.log(`${this.name} is shooting`);
+//     }
+// };
+
+// function createCharacter(name) {
+//     return { name };
+// }
+
+// const aqua = createCharacter('Aqua');
+// Object.assign(aqua, canShoot);
+// aqua.shoot();
+
+// const jet = createCharacter('Jet');
+// Object.assign(jet, canFly);
+// jet.fly();
+
+// const nemo = createCharacter('Nemo');
+// Object.assign(nemo, canSwim);
+// nemo.swim();
+
+// --------------------------------------------------
+
+const canGreet = {
+    greet(otherCharacter) {
+        console.log(`${this.name} greets ${otherCharacter.name}`)
     }
 };
 
-const canFly = {
-    fly() {
-        console.log(`${this.name} is flying`);
-    }
-};
-
-const canShoot = {
-    shoot() {
-        console.log(`${this.name} is shooting`);
+const canReactToGreeting = {
+    react() {
+        console.log(`${this.name} smiles in return`);
     }
 };
 
@@ -581,22 +611,16 @@ function createCharacter(name) {
     return { name };
 }
 
-const aqua = createCharacter('Aqua');
-Object.assign(aqua, canShoot);
-aqua.shoot();
+const alice = createCharacter('Alice');
+const bob = createCharacter('Bob');
 
-const jet = createCharacter('Jet');
-Object.assign(jet, canFly);
-jet.fly();
-
-const nemo = createCharacter('Nemo');
-Object.assign(nemo, canSwim);
-nemo.swim();
+Object.assign(alice, canGreet);
+Object.assign(bob, canReactToGreeting)
 
 
 
-
-
+alice.greet(bob);
+bob.react();
 
 
 
