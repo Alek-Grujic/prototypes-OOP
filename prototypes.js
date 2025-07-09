@@ -622,6 +622,12 @@
 
 // --------------------------------------------------
 
+function mixin(Child, Parent) {
+    Child.prototype = Object.create(Parent.prototype);
+    Child.prototype.constructor = Child;
+}
+
+// User construcor
 function User(name, email) {
     this.name = name;
     this.email = email;
@@ -631,19 +637,66 @@ User.prototype.describe = function () {
     console.log(`${this.name} - ${this.email}`);
 }
 
+// Student construcor
 function Student(name, email) {
     User.call(this, name, email);
 }
 
-Student.prototype = Object.create(User.prototype);
-Student.prototype.construcor = Student;
+mixin(Student, User);
 
 Student.prototype.enroll = function (course) {
     console.log(`${this.name} enrolled in ${course}`);
 }
 
-const y = new Student('Ane', 'ane.jones@gmail.com');
-const x = new User('Mark', 'mark.office@gmail.com');
-y.describe();
-x.describe();
-y.enroll('Advanced JS');
+// Instructor construcor
+function Instructor(name, email) {
+    User.call(this, name, email);
+}
+
+mixin(Instructor, User);
+
+Instructor.prototype.createCourse = function (courseName) {
+    console.log(`${this.name} created course ${courseName}`);
+}
+
+const canComment = {
+    comment(comment) {
+        console.log(`Comment by ${this.name}: ${comment}`);
+    }
+}
+
+const canRate = {
+    rate(rate) {
+        console.log(`Course rate by ${this.name}: ${rate}`);
+    }
+}
+
+const canManageUsers = {
+    manageUsers(student) {
+        console.log(`${this.name} banned user: ${student}`);
+    }
+}
+
+
+// output
+const ane = new Student('Ane', 'ane.jones@gmail.com');
+const mark = new Student('Mark', 'mark.office@gmail.com');
+ane.describe();
+ane.enroll('Advanced JS');
+mark.describe();
+mark.enroll('PHP and web dev');
+const prof = new Instructor('Professor Jakob', 'jakob.office@gmial.com');
+prof.describe();
+prof.createCourse('Algoritms and Date Structure')
+
+Object.assign(Student.prototype, canComment, canRate);
+Object.assign(Instructor.prototype, canComment, canManageUsers);
+
+
+ane.comment('This course is awsome!');
+ane.rate(10)
+mark.comment('I think this course is really solid!');
+mark.rate(8);
+
+prof.comment('Students are really smart!');
+prof.manageUsers(ane.name);
