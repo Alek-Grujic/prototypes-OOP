@@ -622,81 +622,125 @@
 
 // --------------------------------------------------
 
-function mixin(Child, Parent) {
-    Child.prototype = Object.create(Parent.prototype);
-    Child.prototype.constructor = Child;
-}
+// function mixin(Child, Parent) {
+//     Child.prototype = Object.create(Parent.prototype);
+//     Child.prototype.constructor = Child;
+// }
 
-// User construcor
-function User(name, email) {
-    this.name = name;
-    this.email = email;
-}
+// // User construcor
+// function User(name, email) {
+//     this.name = name;
+//     this.email = email;
+// }
 
-User.prototype.describe = function () {
-    console.log(`${this.name} - ${this.email}`);
-}
+// User.prototype.describe = function () {
+//     console.log(`${this.name} - ${this.email}`);
+// }
 
-// Student construcor
-function Student(name, email) {
-    User.call(this, name, email);
-}
+// // Student construcor
+// function Student(name, email) {
+//     User.call(this, name, email);
+// }
 
-mixin(Student, User);
+// mixin(Student, User);
 
-Student.prototype.enroll = function (course) {
-    console.log(`${this.name} enrolled in ${course}`);
-}
+// Student.prototype.enroll = function (course) {
+//     console.log(`${this.name} enrolled in ${course}`);
+// }
 
-// Instructor construcor
-function Instructor(name, email) {
-    User.call(this, name, email);
-}
+// // Instructor construcor
+// function Instructor(name, email) {
+//     User.call(this, name, email);
+// }
 
-mixin(Instructor, User);
+// mixin(Instructor, User);
 
-Instructor.prototype.createCourse = function (courseName) {
-    console.log(`${this.name} created course ${courseName}`);
-}
+// Instructor.prototype.createCourse = function (courseName) {
+//     console.log(`${this.name} created course ${courseName}`);
+// }
 
-const canComment = {
-    comment(comment) {
-        console.log(`Comment by ${this.name}: ${comment}`);
+// const canComment = {
+//     comment(comment) {
+//         console.log(`Comment by ${this.name}: ${comment}`);
+//     }
+// }
+
+// const canRate = {
+//     rate(rate) {
+//         console.log(`Course rate by ${this.name}: ${rate}`);
+//     }
+// }
+
+// const canManageUsers = {
+//     manageUsers(student) {
+//         console.log(`${this.name} banned user: ${student}`);
+//     }
+// }
+
+
+// // output
+// const ane = new Student('Ane', 'ane.jones@gmail.com');
+// const mark = new Student('Mark', 'mark.office@gmail.com');
+// ane.describe();
+// ane.enroll('Advanced JS');
+// mark.describe();
+// mark.enroll('PHP and web dev');
+// const prof = new Instructor('Professor Jakob', 'jakob.office@gmial.com');
+// prof.describe();
+// prof.createCourse('Algoritms and Date Structure')
+
+// Object.assign(Student.prototype, canComment, canRate);
+// Object.assign(Instructor.prototype, canComment, canManageUsers);
+
+
+// ane.comment('This course is awsome!');
+// ane.rate(10)
+// mark.comment('I think this course is really solid!');
+// mark.rate(8);
+
+// prof.comment('Students are really smart!');
+// prof.manageUsers(ane.name);
+
+// --------------------------------------------------
+
+// first exercise in section Prototypical Inheritance
+
+function HtmlElement() {
+    this.click = function () {
+        console.log('clicked');
     }
 }
 
-const canRate = {
-    rate(rate) {
-        console.log(`Course rate by ${this.name}: ${rate}`);
+HtmlElement.prototype.focus = function () {
+    console.log('focused');
+}
+
+const e = new HtmlElement();
+
+console.log(e);
+e.focus();
+
+function HtmlSelectElement(array) {
+    this.items = [];
+    if (array !== undefined) this.items = array;
+    this.addItem = function (item) {
+        this.items.push(item)
+    }
+    this.removeItem = function (item) {
+        this.items = this.items.filter(number => number !== item)
     }
 }
 
-const canManageUsers = {
-    manageUsers(student) {
-        console.log(`${this.name} banned user: ${student}`);
-    }
-}
+HtmlSelectElement.prototype = new HtmlElement(); // 👈 važno!
+HtmlSelectElement.prototype.constructor = HtmlSelectElement;
 
+const s = new HtmlSelectElement()
+console.log(s);
 
-// output
-const ane = new Student('Ane', 'ane.jones@gmail.com');
-const mark = new Student('Mark', 'mark.office@gmail.com');
-ane.describe();
-ane.enroll('Advanced JS');
-mark.describe();
-mark.enroll('PHP and web dev');
-const prof = new Instructor('Professor Jakob', 'jakob.office@gmial.com');
-prof.describe();
-prof.createCourse('Algoritms and Date Structure')
+s.addItem(1);
+s.addItem(2);
 
-Object.assign(Student.prototype, canComment, canRate);
-Object.assign(Instructor.prototype, canComment, canManageUsers);
+s.removeItem(2);
 
+console.log(s.items);
 
-ane.comment('This course is awsome!');
-ane.rate(10)
-mark.comment('I think this course is really solid!');
-mark.rate(8);
-
-prof.comment('Students are really smart!');
-prof.manageUsers(ane.name);
