@@ -705,6 +705,50 @@
 
 // first exercise in section Prototypical Inheritance
 
+// function HtmlElement() {
+//     this.click = function () {
+//         console.log('clicked');
+//     }
+// }
+
+// HtmlElement.prototype.focus = function () {
+//     console.log('focused');
+// }
+
+// const e = new HtmlElement();
+
+// console.log(e);
+// e.focus();
+
+// function HtmlSelectElement(items = []) {
+//     this.items = items;
+//     this.addItem = function (item) {
+//         this.items.push(item)
+//     }
+//     this.removeItem = function (item) {
+//         this.items = this.items.filter(number => number !== item)
+//     }
+// }
+
+// // ---------
+// HtmlSelectElement.prototype = new HtmlElement();
+// HtmlSelectElement.prototype.constructor = HtmlSelectElement;
+// // ---------
+
+// const s = new HtmlSelectElement()
+// console.log(s);
+
+// s.addItem(1);
+// s.addItem(2);
+
+// s.removeItem(2);
+
+// console.log(s.items);
+
+// --------------------------------------------------
+
+// second exercise in section Prototypical Inheritance
+
 function HtmlElement() {
     this.click = function () {
         console.log('clicked');
@@ -715,11 +759,6 @@ HtmlElement.prototype.focus = function () {
     console.log('focused');
 }
 
-const e = new HtmlElement();
-
-console.log(e);
-e.focus();
-
 function HtmlSelectElement(items = []) {
     this.items = items;
     this.addItem = function (item) {
@@ -727,6 +766,14 @@ function HtmlSelectElement(items = []) {
     }
     this.removeItem = function (item) {
         this.items = this.items.filter(number => number !== item)
+    }
+    this.render = function () {
+        const output = this.items
+            .map(n => (`
+<option>${n}</option>`))
+            .join(' ');
+        return (`<section> ${output} 
+</section>`);
     }
 }
 
@@ -736,12 +783,29 @@ HtmlSelectElement.prototype.constructor = HtmlSelectElement;
 // ---------
 
 const s = new HtmlSelectElement()
-console.log(s);
 
 s.addItem(1);
 s.addItem(2);
-
 s.removeItem(2);
 
-console.log(s.items);
+function HtmlImageElement(src = undefined) {
+    this.src = src;
+    this.render = function () {
+        return (`<img src=${this.src} />`);
+    }
+}
 
+HtmlImageElement.prototype = new HtmlElement();
+HtmlImageElement.prototype.constructor = HtmlImageElement;
+
+const y = new HtmlImageElement();
+
+y.src = 'http://';
+
+const elements = [
+    new HtmlSelectElement([1, 2, 3]),
+    new HtmlImageElement('http://')
+];
+
+for (let element of elements)
+    console.log(element.render());
