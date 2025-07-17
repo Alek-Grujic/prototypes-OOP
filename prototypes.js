@@ -720,9 +720,8 @@ const e = new HtmlElement();
 console.log(e);
 e.focus();
 
-function HtmlSelectElement(array) {
-    this.items = [];
-    if (array !== undefined) this.items = array;
+function HtmlSelectElement(items = []) {
+    this.items = items;
     this.addItem = function (item) {
         this.items.push(item)
     }
@@ -731,8 +730,10 @@ function HtmlSelectElement(array) {
     }
 }
 
-HtmlSelectElement.prototype = new HtmlElement(); // 👈 važno!
+// ---------
+HtmlSelectElement.prototype = new HtmlElement();
 HtmlSelectElement.prototype.constructor = HtmlSelectElement;
+// ---------
 
 const s = new HtmlSelectElement()
 console.log(s);
